@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CARVANI — Maison italienne depuis 1843</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fff;--ink:#000;--gold:#b8963e;--mute:#777;--line:#e4e1da;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 12px/1.6 Jost,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+h1,h2,h3,p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;color:inherit}
+svg{display:block;width:100%;height:auto}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 24px;background:rgba(255,255,255,.96)}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:600;letter-spacing:.3em;padding-left:.3em}
+.l,.r{display:flex;gap:22px}.r{justify-content:flex-end}
+.l a:hover,.r button:hover{color:var(--gold)}
+.bt{background:none;border:0;padding:0}
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#fff}
+.hero svg{height:82vh}
+.hero .tx{position:absolute;left:24px;bottom:28px;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.hero .tx small{display:block;color:#e2c473;letter-spacing:.25em}
+.hero .tx h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,6vw,76px);text-transform:none;letter-spacing:.02em;line-height:1;margin:6px 0 14px;font-weight:500}
+.cta{display:inline-block;border-bottom:1px solid #fff;padding-bottom:2px}
+.bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:30px 24px 14px}
+.bar div{display:flex;gap:20px;flex-wrap:wrap}
+.f{background:none;border:0;padding:2px 0;color:var(--mute)}
+.f.on{color:var(--ink);border-bottom:1px solid var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:0 6px 60px}
+.card{background:none;border:0;padding:0;text-align:left;display:block}
+.card .im{overflow:hidden}
+.card .im svg{transition:transform .6s}
+.card:hover .im svg{transform:scale(1.04)}
+.card .m{display:flex;justify-content:space-between;gap:8px;padding:10px 12px 18px}
+.card .m span:last-child{color:var(--mute);white-space:nowrap}
+.about{background:#000;color:#fff;padding:90px 24px;text-align:center}
+.about b{display:block;font:600 clamp(70px,16vw,190px)/1 'Cormorant Garamond',Georgia,serif;color:var(--gold);letter-spacing:.04em}
+.about p{max-width:60ch;margin:18px auto 0;color:#bbb;line-height:2}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1000px;margin:56px auto 0;text-align:left}
+.tl div{border-top:1px solid var(--gold);padding-top:12px}
+.tl h3{font:500 28px 'Cormorant Garamond',Georgia,serif;text-transform:none;color:#fff}
+.tl p{margin:4px 0 0;font-size:11px;color:#aaa}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:30px 24px;color:var(--mute);font-size:11px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:30;display:none}
+.ov.open{display:block}
+#modal{position:fixed;inset:0;z-index:31;background:var(--paper);display:none;overflow:auto;padding-top:env(safe-area-inset-top,0px)}
+#modal.open{display:grid;grid-template-columns:1.1fr 1fr}
+#modal .info{padding:70px 48px 40px;max-width:560px}
+#modal h2{font:500 34px 'Cormorant Garamond',Georgia,serif;letter-spacing:.08em}
+.pr{font-size:15px;margin:6px 0 18px}
+.desc{text-transform:none;letter-spacing:.02em;font-size:14px;color:#444;margin-bottom:22px}
+dl{display:grid;grid-template-columns:110px 1fr;gap:8px 12px;border-top:1px solid var(--line);padding-top:16px;margin:0 0 24px;font-size:11px}
+dt{color:var(--mute)}dd{margin:0}
+.sz{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 22px}
+.sz button{min-width:46px;padding:10px;background:none;border:1px solid var(--line)}
+.sz button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.add{width:100%;background:var(--ink);color:#fff;border:0;padding:16px;transition:.25s}
+.add:hover{background:var(--gold);color:#000}
+.x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:20px;z-index:40;background:none;border:0;font-size:30px;line-height:1}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--paper);z-index:32;transform:translateX(100%);transition:transform .35s;padding:calc(24px + env(safe-area-inset-top,0px)) 24px 24px;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.25)}
+#drawer.open{transform:none}
+#drawer h3{font-size:12px;border-bottom:1px solid var(--ink);padding-bottom:12px;display:flex;justify-content:space-between}
+#items{flex:1;overflow:auto;padding:8px 0}
+.it{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.it svg{width:56px}.it span{flex:1}
+.it button{background:none;border:0;color:var(--mute)}
+.tot{display:flex;justify-content:space-between;margin:14px 0;font-size:14px}
+.pn{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94vw);max-height:88vh;overflow:auto;background:var(--paper);z-index:33;padding:32px 28px;display:none;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.pn.open{display:block}
+.pn h2{font:500 30px 'Cormorant Garamond',Georgia,serif;margin-bottom:6px;letter-spacing:.06em}
+.pn h3{border-bottom:1px solid var(--ink);padding:18px 0 8px;margin-bottom:12px}
+.pn input,.pn select{width:100%;padding:12px;border:1px solid var(--line);margin:0 0 10px;font:inherit;letter-spacing:.02em;text-transform:none;background:var(--paper);color:var(--ink)}
+.pn input[type=color]{height:42px;padding:2px}
+.pn label{display:block;margin:0 0 10px}
+.pn label input{width:110px;display:inline-block;margin:0 6px}
+.px{position:absolute;top:10px;right:14px;background:none;border:0;font-size:22px}
+.mu{color:var(--mute)}.tabs{display:flex;gap:20px;margin-bottom:14px}
+.ar{display:grid;grid-template-columns:1fr 92px 82px 28px;gap:6px;align-items:center;margin-bottom:6px}
+.ar input{margin:0;padding:8px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.l a:not(:first-child){display:none}#modal.open{display:block}#modal .info{padding:24px}.logo{font-size:22px}.hero svg{height:60vh}header{padding:12px 16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#fff;--ink:#000}}
+:root[data-theme="dark"]{--paper:#fff;--ink:#000}
+</style>
+</head>
+<body>
+<header>
+  <div class="l"><a href="#col">Collection</a><a href="#maison">Maison</a></div>
+  <a class="logo" href="#top">CARVANI</a>
+  <div class="r"><button class="bt" data-acc id="acb">Compte</button><button class="bt" id="open">Panier (<span id="n">0</span>)</button></div>
+</header>
+
+<main id="top">
+<div class="hero" id="hero"><div class="tx"><small>MILAN · DEPUIS 1843</small><h1>Automne–Hiver 2026</h1><a class="cta" href="#col">Découvrir</a></div></div>
+
+<section id="col">
+  <div class="bar"><div id="fl"></div><span style="color:var(--mute)" id="cnt"></span></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="about" id="maison">
+  <small style="color:#999;letter-spacing:.25em">MAISON FONDÉE EN</small>
+  <b>1843</b>
+  <p>Depuis plus de 180 ans, la maison Carvani coupe et coud à Milan des costumes et des mailles qui traversent les générations. Même atelier, même exigence : le tissu choisi un à un, le fil doré en signature.</p>
+  <div class="tl">
+    <div><h3>1843</h3><p>Ouverture de l'atelier de tailleur à Milan.</p></div>
+    <div><h3>1921</h3><p>Première collection de costumes prêts à ajuster.</p></div>
+    <div><h3>1968</h3><p>Lancement des mailles en laine mérinos et cachemire.</p></div>
+    <div><h3>Aujourd'hui</h3><p>Livraison dans toute l'Algérie, retouches offertes.</p></div>
+  </div>
+</section>
+</main>
+
+<footer><span>© 2026 Carvani S.p.A. — Milano, 1843</span><span>Livraison offerte dès 30 000 DZD</span><span>Paiement à la livraison</span><button class="bt" data-adm style="color:var(--mute)">ESPACE ADMIN</button></footer>
+
+<div class="ov" id="ov"></div>
+<div class="pn" id="panel" role="dialog"></div>
+<div id="modal" role="dialog" aria-modal="true"></div>
+<aside id="drawer" aria-label="Panier">
+  <h3>PANIER <button class="bt" id="cl" aria-label="Fermer">✕</button></h3>
+  <div id="items"></div>
+  <div id="pt" style="font-size:11px;margin-top:10px;line-height:1.9"></div><div class="tot"><span>TOTAL</span><span id="tot">0 DZD</span></div>
+  <button class="add" id="pay">PASSER LA COMMANDE</button>
+</aside>
+
+<script>
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const S=ld('cv_set',{rate:1000,val:10,adm:null}),pts=p=>p.pts!=null?p.pts:Math.floor(p.p/S.rate);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const G={
+suit:"M30 14l20 20 20-20 18 14-8 62H20L12 28z",
+sw:"M36 16h28l6 8 22 14-8 22-10-6v40H26V54l-10 6-8-22 22-14z",
+sh:"M34 14l16 14 16-14 22 14-8 18-10-4v50H30V42l-10 4-8-18z",
+pt:"M30 10h40l8 82H54L50 40l-4 52H22z"};
+const D={suit:"M50 34v56M50 34l-12 20M50 34l12 20",sw:"M36 16c0 8 28 8 28 0M26 76h48",sh:"M50 28v58M46 40h0M46 54h0",pt:"M30 20h40M50 40v10"};
+const C={
+suit:{t:'costumes',comp:'100 % laine vierge Super 120',coupe:'Slim, deux boutons',or:'Piémont, Italie',ent:'Nettoyage à sec',z:['46','48','50','52','54']},
+sw:{t:'pulls',comp:'100 % laine mérinos extra-fine',coupe:'Régulière, maille côtelée',or:'Biella, Italie',ent:'Lavage main 30°, séchage à plat',z:['S','M','L','XL']},
+sh:{t:'chemises',comp:'100 % coton popeline',coupe:'Ajustée, col italien',or:'Lombardie, Italie',ent:'Lavage machine 40°',z:['38','40','42','44']},
+pt:{t:'pantalons',comp:'98 % laine, 2 % élasthanne',coupe:'Droite, pli marqué',or:'Piémont, Italie',ent:'Nettoyage à sec',z:['40','42','44','46','48']}};
+const BASE=[
+{n:'Costume Duomo',p:89000,k:'suit',col:'#1c1c1f',cn:'Noir',st:1,d:'Costume deux pièces à fines rayures tennis, doublure en cupro et boutons dorés.'},
+{n:'Costume Brera',p:79000,k:'suit',col:'#d9d2c3',cn:'Ivoire',d:'Costume en laine claire, épaules souples et revers étroits pour toutes les saisons.'},
+{n:'Pull Navigli',p:28000,k:'sw',col:'#2a2a2c',cn:'Anthracite',d:'Col roulé en maille fine, doux et chaud, finition côtes aux poignets.'},
+{n:'Pull Torino',p:22000,k:'sw',col:'#c4a574',cn:'Camel',d:'Pull col rond en mérinos, coupe nette et teinte chaude.'},
+{n:'Chemise Sforza',p:12500,k:'sh',col:'#f6f4ef',cn:'Blanc',d:'Chemise en popeline dense, boutons nacrés et coutures fines.'},
+{n:'Pantalon Scala',p:24000,k:'pt',col:'#3c3c40',cn:'Gris',d:'Pantalon de costume en laine froide, taille mi-haute et pli marqué.'},
+{n:'Costume Milano',p:96000,k:'suit',col:'#1b2437',cn:'Bleu nuit',d:'Notre costume signature, entièrement monté à la main en 20 heures.'},
+{n:'Pull Sforza',p:26000,k:'sw',col:'#eae5da',cn:'Crème',d:'Maille épaisse en mérinos, texture souple et boutons dorés.'}
+].map((x,i)=>({...x,id:i}));
+const norm=x=>({...x,...C[x.k],ref:x.ref||'CV-'+(1843+x.id%10000)});
+let P=ld('cv_prods',null)||BASE.map(norm);
+const $=s=>document.querySelector(s),eur=v=>v.toLocaleString('fr-FR')+' DZD';
+function pic(p,u){if(p.img)return `<svg viewBox="0 0 100 125" role="img" aria-label="${p.n}"><image href="${p.img}" width="100" height="125" preserveAspectRatio="xMidYMid slice"/></svg>`;const g='g'+p.id+u;return `<svg viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${p.n}"><defs><linearGradient id="${g}b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0ede7"/><stop offset="1" stop-color="#d4cfc4"/></linearGradient><linearGradient id="${g}h" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient><pattern id="${g}s" width="2.6" height="3" patternUnits="userSpaceOnUse"><path d="M1 0v3" stroke="#fff" stroke-opacity=".22" stroke-width=".35"/></pattern></defs><rect width="100" height="125" fill="url(#${g}b)"/><ellipse cx="50" cy="109" rx="30" ry="3" fill="#000" opacity=".16"/><g transform="translate(10 15) scale(.8)" stroke="#000" stroke-opacity=".35" stroke-width=".6" stroke-linejoin="round"><path d="${G[p.k]}" fill="${p.col}"/>${p.st?`<path d="${G[p.k]}" fill="url(#${g}s)" stroke="none"/>`:''}<path d="${G[p.k]}" fill="url(#${g}h)" stroke="none"/><path d="${D[p.k]}" fill="none" stroke="#b8963e" stroke-opacity=".7"/></g></svg>`}
+$('#hero').insertAdjacentHTML('afterbegin',pic(BASE[6],'h1')+pic(BASE[2],'h2'));
+let flt='tout';
+const cats=['tout','costumes','pulls','chemises','pantalons'];
+function list(){
+ $('#fl').innerHTML=cats.map(c=>`<button class="f${c===flt?' on':''}" data-f="${c}">${c}</button>`).join('');
+ const L=P.filter(p=>flt==='tout'||p.t===flt);
+ $('#cnt').textContent=L.length+' articles';
+ $('#grid').innerHTML=L.map(p=>`<button class="card" data-o="${p.id}"><div class="im">${pic(p,'c')}</div><div class="m"><span>${p.n}</span><span>${eur(p.p)}</span></div></button>`).join('')}
+let cur=null,size=null;
+function openP(id){cur=P.find(x=>x.id===id);size=null;const p=cur;
+ $('#modal').innerHTML=`<div>${pic(p,'m')}</div><div class="info"><h2>${p.n}</h2><div class="pr">${eur(p.p)}</div><p class="desc">${p.d}</p><dl><dt>Référence</dt><dd>${p.ref}</dd><dt>Couleur</dt><dd>${p.cn}</dd><dt>Composition</dt><dd>${p.comp}</dd><dt>Coupe</dt><dd>${p.coupe}</dd><dt>Origine</dt><dd>${p.or}</dd><dt>Entretien</dt><dd>${p.ent}</dd><dt>Fidélité</dt><dd>+${pts(p)} points</dd></dl><div>TAILLE</div><div class="sz">${p.z.map(z=>`<button data-z="${z}">${z}</button>`).join('')}</div><button class="add" id="ad">AJOUTER AU PANIER</button></div><button class="x" id="mx" aria-label="Fermer">✕</button>`;
+ $('#modal').classList.add('open');$('#modal').scrollTop=0}
+const cart=[];let usep=false,adm=false,U=ld('cv_users',[]),sess=ld('cv_sess',null);
+const me=()=>U.find(u=>u.id===sess),savP=()=>{sv('cv_prods',P);list();draw()},savU=()=>sv('cv_users',U);
+const hash=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+const rd=f=>new Promise(r=>{if(!f)return r('');const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,640/im.width),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.8))};im.onerror=()=>r('');im.src=fr.result};fr.onerror=()=>r('');fr.readAsDataURL(f)});
+const pn=$('#panel');
+function showP(h){pn.innerHTML=h+'<button class="px" data-xp aria-label="Fermer">✕</button>';pn.classList.add('open');$('#ov').classList.add('open')}
+function closeAll(){pn.classList.remove('open');$('#drawer').classList.remove('open');$('#ov').classList.remove('open')}
+function hdr(){const u=me();$('#acb').textContent=u?u.nm.split(' ')[0]+' · '+u.pts+' pts':'Compte'}
+function accV(tab='in',msg=''){const u=me();
+ if(u)return showP(`<h2>Bonjour ${u.nm.split(' ')[0]}</h2><p class="mu">${u.pts} points · valeur ${eur(u.pts*S.val)}</p><dl style="margin-top:14px"><dt>E-mail</dt><dd>${u.em}</dd><dt>Téléphone</dt><dd>${u.ph||'—'}</dd></dl><h3>Dernières commandes</h3>${(u.orders||[]).map(o=>`<div class="it"><span>${o.d} · ${o.n} art.</span><span>${eur(o.t)} (+${o.e} pts)</span></div>`).join('')||'<p class="mu">Aucune commande.</p>'}<button class="add" data-out style="margin-top:18px">SE DÉCONNECTER</button>`);
+ showP(`<div class="tabs"><button class="f${tab==='in'?' on':''}" data-t="in">Connexion</button><button class="f${tab==='up'?' on':''}" data-t="up">Créer un compte</button></div><p style="color:#b00;min-height:18px">${msg}</p>`+(tab==='in'?`<input id="em" type="email" placeholder="E-mail"><input id="pw" type="password" placeholder="Mot de passe"><button class="add" id="li">SE CONNECTER</button>`:`<input id="nm" placeholder="Nom complet"><input id="em" type="email" placeholder="E-mail"><input id="ph" type="tel" placeholder="Téléphone"><input id="pw" type="password" placeholder="Mot de passe (6 caractères min.)"><button class="add" id="su">CRÉER MON COMPTE</button><p class="mu" style="margin-top:10px">Chaque commande vous rapporte des points de fidélité.</p>`))}
+function adminV(){
+ if(!adm)return showP(`<h2>Espace admin</h2><p class="mu" style="margin-bottom:10px">${S.adm?'Entrez votre code admin.':'Première utilisation : définissez un code admin.'}</p><input id="ac" type="password" placeholder="Code admin${S.adm?'':' (6 caractères min.)'}"><button class="add" id="al">${S.adm?'ENTRER':'DÉFINIR LE CODE'}</button>`);
+ showP(`<h2>Espace admin</h2><h3>Fidélité</h3><label>1 point gagné par <input id="sr" type="number" min="1" value="${S.rate}"> DZD</label><label>1 point = <input id="sv" type="number" min="0" value="${S.val}"> DZD de réduction</label><h3>Produits (prix · points)</h3>${P.map(p=>`<div class="ar"><span>${p.n}</span><input type="number" data-pp="${p.id}" value="${p.p}" title="Prix DZD"><input type="number" data-pq="${p.id}" value="${p.pts!=null?p.pts:''}" placeholder="auto ${Math.floor(p.p/S.rate)}" title="Points"><button class="bt" data-del="${p.id}" aria-label="Supprimer">🗑</button></div>`).join('')}<h3>Ajouter un produit</h3><input id="an" placeholder="Nom"><input id="ap" type="number" placeholder="Prix en DZD"><select id="ak"><option value="suit">Costume</option><option value="sw">Pull</option><option value="sh">Chemise</option><option value="pt">Pantalon</option></select><input id="ac2" type="color" value="#1c1c1f"><input id="ad2" placeholder="Description"><input id="aq" type="number" placeholder="Points (vide = automatique)"><input id="pf" type="file" accept="image/*"><button class="add" id="addp">AJOUTER AU CATALOGUE</button><h3>Clients (points)</h3>${U.map(u=>`<div class="ar"><span>${u.nm}<br><small class="mu">${u.em}</small></span><input type="number" data-uid="${u.id}" value="${u.pts}"><span></span></div>`).join('')||'<p class="mu">Aucun client inscrit.</p>'}`)}
+function draw(){const u=me();$('#n').textContent=cart.length;
+ $('#items').innerHTML=cart.length?cart.map((x,i)=>`<div class="it">${pic(x.p,'k'+i)}<span>${x.p.n}<br><small style="color:var(--mute)">Taille ${x.z} · ${eur(x.p.p)}</small></span><button data-r="${i}" aria-label="Retirer">✕</button></div>`).join(''):'<p style="color:var(--mute)">Votre panier est vide.</p>';
+ const sub=cart.reduce((a,x)=>a+x.p.p,0),earn=cart.reduce((a,x)=>a+pts(x.p),0),mx=u&&S.val>0?Math.min(u.pts,Math.floor(sub/S.val)):0,use=usep?mx:0;
+ $('#pt').innerHTML=cart.length?(u?`<label><input type="checkbox" id="usep"${usep?' checked':''}> Utiliser mes points (−${eur(mx*S.val)})</label>+${earn} points sur cette commande`:`<button class="bt" data-acc style="text-decoration:underline">Créez un compte</button> pour gagner ${earn} points`):'';
+ $('#tot').textContent=eur(sub-use*S.val);return{sub,earn,use}}
+document.addEventListener('click',async e=>{
+ const t=e.target.closest('button');if(!t)return;const d=t.dataset;
+ if(d.f){flt=d.f;list()}
+ if(d.o)openP(+d.o);
+ if(d.z){size=d.z;document.querySelectorAll('.sz button').forEach(b=>b.classList.toggle('on',b===t))}
+ if(t.id==='mx')$('#modal').classList.remove('open');
+ if(t.id==='ad'){if(!size){t.textContent='CHOISISSEZ UNE TAILLE';return}cart.push({p:cur,z:size});draw();$('#modal').classList.remove('open');$('#drawer').classList.add('open');$('#ov').classList.add('open')}
+ if(d.r){cart.splice(+d.r,1);draw()}
+ if(t.id==='open'){$('#drawer').classList.add('open');$('#ov').classList.add('open')}
+ if(t.id==='cl'||d.xp)closeAll();
+ if(d.acc!==undefined)accV();
+ if(d.adm!==undefined)adminV();
+ if(d.t)accV(d.t);
+ if(d.out){sess=null;sv('cv_sess',null);hdr();draw();closeAll()}
+ if(t.id==='li'){const em=$('#em').value.trim().toLowerCase(),h=await hash($('#pw').value),u=U.find(x=>x.em===esc(em)&&x.h===h);if(!u)return accV('in','E-mail ou mot de passe incorrect.');sess=u.id;sv('cv_sess',sess);hdr();draw();accV()}
+ if(t.id==='su'){const nm=$('#nm').value.trim(),em=$('#em').value.trim().toLowerCase(),pw=$('#pw').value;if(!nm||!/^\S+@\S+\.\S+$/.test(em)||pw.length<6)return accV('up','Vérifiez les champs (mot de passe : 6 caractères min.).');if(U.some(x=>x.em===esc(em)))return accV('up','Un compte existe déjà avec cet e-mail.');const u={id:'u'+Date.now(),nm:esc(nm),em:esc(em),ph:esc($('#ph').value.trim()),h:await hash(pw),pts:0,orders:[]};U.push(u);savU();sess=u.id;sv('cv_sess',sess);hdr();draw();accV()}
+ if(t.id==='al'){const v=$('#ac').value;if(!S.adm){if(v.length<6)return;S.adm=await hash(v);sv('cv_set',S);adm=true}else if(await hash(v)===S.adm)adm=true;else{$('#ac').value='';$('#ac').placeholder='Code incorrect';return}adminV()}
+ if(d.del&&adm){P=P.filter(x=>x.id!==+d.del);savP();adminV()}
+ if(t.id==='addp'&&adm){const n=$('#an').value.trim(),pr=+$('#ap').value,q=$('#aq').value;if(!n||!(pr>0))return;const id=Date.now(),x=norm({id,n:esc(n),p:pr,k:$('#ak').value,col:$('#ac2').value,cn:$('#ac2').value,d:esc($('#ad2').value),img:await rd($('#pf').files[0])});if(q!=='')x.pts=Math.max(0,+q);P.unshift(x);savP();adminV()}
+ if(t.id==='pay'){if(!cart.length)return;const u=me(),{sub,earn,use}=draw(),total=sub-use*S.val;
+  if(u){u.pts=u.pts-use+earn;u.orders=[{d:new Date().toLocaleDateString('fr-FR'),t:total,e:earn,n:cart.length},...(u.orders||[])].slice(0,5);savU()}
+  cart.length=0;usep=false;draw();hdr();$('#items').innerHTML=`<p>Merci ! Commande de ${eur(total)} enregistrée (démo).${u?' Vous gagnez '+earn+' points.':''}</p>`}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;
+ if(t.id==='usep'){usep=t.checked;draw();return}
+ if(!adm)return;
+ if(d.pp){P.find(x=>x.id===+d.pp).p=Math.max(0,+t.value||0);savP();adminV()}
+ if(d.pq){const p=P.find(x=>x.id===+d.pq);if(t.value==='')delete p.pts;else p.pts=Math.max(0,Math.floor(+t.value));savP()}
+ if(d.uid){const u=U.find(x=>x.id===d.uid);u.pts=Math.max(0,Math.floor(+t.value||0));savU();hdr();adminV()}
+ if(t.id==='sr'){S.rate=Math.max(1,+t.value||1000);sv('cv_set',S);adminV()}
+ if(t.id==='sv'){S.val=Math.max(0,+t.value||0);sv('cv_set',S);adminV()}});
+$('#ov').onclick=closeAll;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#modal').classList.remove('open');closeAll()}});
+list();draw();hdr();
+</script>
+</body>
+</html>
